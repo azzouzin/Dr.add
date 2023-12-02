@@ -4,6 +4,7 @@ import 'package:hakim/Controller/Bindings/home_bindings.dart';
 import 'package:hakim/Controller/Bindings/login_bindings.dart';
 import 'package:hakim/Controller/Bindings/signup_bindings.dart';
 import 'package:hakim/Controller/Services/get_services.dart';
+import 'package:hakim/Views/Home%20Screens/Search%20Screens/results_page.dart';
 import 'package:hakim/Views/Home%20Screens/doctor_details.dart';
 import 'package:hakim/Views/Login%20Screens/confirmation.dart';
 import 'package:hakim/Views/Login%20Screens/forget_password.dart';
@@ -23,7 +24,7 @@ import 'Views/Profile Screens/profile_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 Future initialServices() async {
@@ -47,23 +48,31 @@ class MyApp extends StatelessWidget {
           bindings: [LoginBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
+        ),
+        GetPage(
+          name: '/searchResult',
+          page: (() => SearchResultsPage()),
+          // bindings: [LoginBindings()],
+          transition: Transition.topLevel,
+          curve: Curves.ease,
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/labodetails',
-          page: (() => LaboDetails()),
+          page: (() => const LaboDetails()),
           bindings: [LoginBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/clinicDetails',
-          page: (() => ClinicDetails()),
+          page: (() => const ClinicDetails()),
           bindings: [LoginBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/commend',
@@ -71,7 +80,7 @@ class MyApp extends StatelessWidget {
           bindings: [HomeBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/profile',
@@ -79,37 +88,37 @@ class MyApp extends StatelessWidget {
           bindings: [HomeBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/search',
-          page: (() => SearchView()),
+          page: (() => const SearchView()),
           bindings: [HomeBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/pharmacyDetails',
-          page: (() => PharmacyDetails()),
+          page: (() => const PharmacyDetails()),
           bindings: [LoginBindings()],
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/doctorDetails',
-          page: (() => DoctorDetails()),
+          page: (() => const DoctorDetails()),
           transition: Transition.downToUp,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/signup',
           page: (() => SignUpScreen()),
           bindings: [SignUpBindings()],
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/forgetpassword',
@@ -117,15 +126,15 @@ class MyApp extends StatelessWidget {
           bindings: [SignUpBindings()],
           transition: Transition.upToDown,
           curve: Curves.ease,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/confirmation',
-          page: (() => ConfirmationScreen()),
+          page: (() => const ConfirmationScreen()),
           bindings: [SignUpBindings()],
           transition: Transition.rightToLeft,
           curve: Curves.bounceIn,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/resetpassword',
@@ -133,7 +142,7 @@ class MyApp extends StatelessWidget {
           bindings: [SignUpBindings()],
           transition: Transition.rightToLeft,
           curve: Curves.bounceIn,
-          transitionDuration: Duration(milliseconds: 1000),
+          transitionDuration: const Duration(milliseconds: 1000),
         ),
         GetPage(
           name: '/home',
@@ -145,7 +154,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/nursescreen',
-          page: (() => NurseScreen()),
+          page: (() => const NurseScreen()),
           transitionDuration: const Duration(milliseconds: 1000),
         ),
       ],

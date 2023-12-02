@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hakim/Controller/Services/auth_services.dart';
 import 'package:hakim/Module/profile.dart';
+
+import '../../Views/Compenent/Constants.dart';
 
 class SignUpController extends GetxController {
   late PatientProfile patientProfile;
@@ -25,21 +28,29 @@ class SignUpController extends GetxController {
       height: '1.50',
       bloodType: 'A+',
       gneder: 'Male',
+      phonNumber: '',
     );
   }
 
   static const baseurl = 'https://medicalapi.onrender.com/';
   Future<int> signUp() async {
     var authService = AuthServices();
-    await authService.signUp(patientProfile);
-    print('Response Code FROM CONTROLLER : ${authService.getcode()}');
-    code = authService.getcode();
-    profileid = authService.getid();
-    code == 201
+    var response = await authService.registerUser(patientProfile);
+    response != null
         ? Get.toNamed('/confirmation')
         : Get.snackbar('SignUp failed', authService.geterror());
 
-    authService.setcode();
+    if (response != null) {
+      // Update app state id registration is seccsefull
+      Get.snackbar(
+          'Congartilations', 'Your Account was created you can log in now',
+          backgroundColor: akhdar);
+      Get.toNamed("/signup");
+    } else {
+      // Update app state id registration is Faild
+      Get.snackbar('Error', authService.geterror(),
+          backgroundColor: pink, colorText: Colors.white);
+    }
     return code;
   }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "673149417891",
+    "project_id": "drwelcome-d426f",
+    "storage_bucket": "drwelcome-d426f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673149417891:android:1e7476b752fcb430070216",
+        "android_client_info": {
+          "package_name": "com.example.hakim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673149417891-q8tj9p6nclrv5igcd67dn9jhvclgujmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOCb5kiCVs4Xi0-yH0Y4NxQ_rH9xsAYlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673149417891-q8tj9p6nclrv5igcd67dn9jhvclgujmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

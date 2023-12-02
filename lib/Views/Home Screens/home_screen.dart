@@ -3,10 +3,12 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 import 'package:hakim/Controller/Controllers/home_controller.dart';
+import '../../Module/doctor.dart';
 import '../Compenent/Constants.dart';
 
 import '../Compenent/shapes.dart';
 import '../Compenent/widgets/custom_navigation_bar.dart';
+import '../Compenent/widgets/search_card.dart';
 
 class HomeScreen extends StatelessWidget {
   late double screenwidthh;
@@ -69,19 +71,25 @@ class HomeScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    width: screenwidth * 0.747663551402 * 0.15,
-                                    height: screenheight * 0.0581888653982,
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(10),
-                                          topLeft: Radius.circular(10)),
-                                      color: azrak,
-                                    ),
-                                    child: const Center(
-                                      child: Icon(
-                                        Icons.search,
-                                        color: Colors.white,
+                                  InkWell(
+                                    onTap: () {
+                                      Get.toNamed("/searchResult");
+                                    },
+                                    child: Container(
+                                      width:
+                                          screenwidth * 0.747663551402 * 0.15,
+                                      height: screenheight * 0.0581888653982,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(10),
+                                            topLeft: Radius.circular(10)),
+                                        color: azrak,
+                                      ),
+                                      child: const Center(
+                                        child: Icon(
+                                          Icons.search,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -223,42 +231,15 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       // ---------------------------------------------------
-                      Center(
-                        child: SizedBox(
-                          width: screenwidth * 0.9,
-                          height: screenheight * 0.25,
-                          child: InkWell(
-                            onTap: () => Get.toNamed('/doctorDetails'),
-                            child: Stack(
-                              children: [
-                                BestDoctor(
-                                    screenwidth: screenwidth,
-                                    screenheight: screenheight),
-                                Positioned(
-                                    bottom: screenwidth * 0.07,
-                                    left: -screenwidth * 0.03,
-                                    child: Image.asset(
-                                      'assets/images/doc.png',
-                                      width: screenwidth * 0.4,
-                                    )),
-                                Positioned(
-                                    bottom: 10,
-                                    left: 10,
-                                    child: SvgPicture.asset(
-                                      'assets/images/1.svg',
-                                      width: screenwidth * 0.3,
-                                    )),
-                                Positioned(
-                                    left: 10,
-                                    bottom: screenwidth * 0.074,
-                                    child: SvgPicture.asset(
-                                      'assets/images/2.svg',
-                                      width: screenwidth * 0.3,
-                                    )),
-                              ],
-                            ),
-                          ),
-                        ),
+                      SearchCard(
+                        doctor: Doctor(
+                            phone: "05 62 41 39 35",
+                            type: "Dentist",
+                            descreption:
+                                "Azzouz Merouani Descreption ....................................................................................................................................................",
+                            photo:
+                                "https://hips.hearstapps.com/hmg-prod/images/portrait-of-a-happy-young-doctor-in-his-clinic-royalty-free-image-1661432441.jpg?crop=0.66698xw:1xh;center,top&resize=1200:*",
+                            name: "Merouani Azzouz"),
                       ),
                       // --------------------------------------------------------------
 
@@ -793,18 +774,19 @@ class BestDoctor extends StatelessWidget {
     super.key,
     required this.screenwidth,
     required this.screenheight,
+    required this.doctor,
   });
 
   final double screenwidth;
   final double screenheight;
-
+  final Doctor doctor;
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 10,
+      bottom: 0,
       left: 10,
       child: Container(
-        width: screenwidth * 0.85,
+        width: screenwidth * 0.9,
         height: screenheight * 0.15,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -827,7 +809,7 @@ class BestDoctor extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Dr.Azzouz Merounai',
+                    'Dr.${doctor.name}',
                     style: TextStyle(
                         fontSize: screenwidth * 0.04,
                         fontWeight: FontWeight.bold),
@@ -843,7 +825,7 @@ class BestDoctor extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    docitem('Dentist', null),
+                    docitem(doctor.type, null),
                     docitem('4.8', Icons.star),
                   ],
                 ),

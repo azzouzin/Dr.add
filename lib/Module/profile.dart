@@ -5,7 +5,7 @@ class PatientProfile {
   final String? id;
   final String firstName;
   final String lastName;
-  final String? phonNumber;
+  final String phonNumber;
   final String wilaya;
   final String dateOfBirth;
   final String password;
@@ -18,7 +18,7 @@ class PatientProfile {
       {this.id,
       required this.firstName,
       required this.lastName,
-      this.phonNumber,
+      required this.phonNumber,
       required this.wilaya,
       required this.dateOfBirth,
       required this.password,
@@ -43,7 +43,7 @@ class PatientProfile {
     return PatientProfile(
       firstName: map['first_name'] as String,
       lastName: map['last_name'] as String,
-      phonNumber: map['number'] != null ? map['number'] as String : null,
+      phonNumber: map['number'] as String,
       password: map['password'] as String,
       email: map['email'],
       wilaya: map['state'] as String,

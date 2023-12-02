@@ -1,10 +1,15 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Module/profile.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '../../Views/Compenent/Constants.dart';
 
 class AuthServices {
   static const baseurl = 'https://medicalapi.onrender.com/';
@@ -237,5 +242,82 @@ class AuthServices {
 
   String getid() {
     return profileid;
+  }
+
+  Future<PatientProfile?> registerUser(PatientProfile patientProfile) async {
+    print('email = ${patientProfile.email}');
+    print('password = ${patientProfile.password}');
+    print('phone = ${patientProfile.phonNumber}');
+    print('name = ${patientProfile.firstName}');
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: patientProfile.email,
+        password: patientProfile.password,
+      );
+
+      // Registration successful, you can access the newly registered user from userCredential.user
+      User? user = userCredential.user;
+
+      if (user != null) {
+        // User registration successful, perform any additional tasks
+        print('User registration successful. User ID: ${user.uid}');
+
+        try {
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set(patientProfile.toMap())
+              .then((value) async {
+            PatientProfile? appUser = await getuserdata(user.uid);
+
+            return appUser;
+          }).catchError((e) {
+            error = e.toString();
+            print('Creat user error : $e');
+
+            return null;
+          });
+        } catch (e) {
+          error = e.toString();
+          Get.snackbar('Error', e.toString(),
+              backgroundColor: pink, colorText: Colors.white);
+          print('Creat User error: $e');
+          return null;
+        }
+      } else {
+        // User registration failed
+        Get.snackbar('Error', 'User registration failed.',
+            backgroundColor: pink, colorText: Colors.white);
+        print('User registration failed.');
+        return null;
+      }
+    } catch (e) {
+      // Registration failed
+      Get.snackbar('Error', e.toString(),
+          backgroundColor: pink, colorText: Colors.white);
+      return null;
+    }
+  }
+
+  Future<PatientProfile?> getuserdata(uid) async {
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+    if (!snapshot.exists) {
+      print('Document does not exist');
+      return null;
+    }
+
+    Object data = snapshot.data()!;
+
+    PatientProfile appUser =
+        PatientProfile.fromMap(data as Map<String, dynamic>);
+
+    print(appUser.firstName);
+
+    // ...
+
+    return appUser;
   }
 }

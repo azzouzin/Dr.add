@@ -48,7 +48,8 @@ class _SignUpScreentate extends State<SignUpScreen> {
 
     controller.getcode() == 201
         ? _controller.nextPage(
-            duration: Duration(milliseconds: 300), curve: Curves.easeInOut)
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut)
         : null;
     setState(() {
       _currentPage++;
@@ -63,6 +64,7 @@ class _SignUpScreentate extends State<SignUpScreen> {
     double screenheight = Get.size.height;
     return SafeArea(
       child: Scaffold(
+        //backgroundColor: bgbleu,
         body: Stack(
           children: [
             PageView(
@@ -94,48 +96,38 @@ class _SignUpScreentate extends State<SignUpScreen> {
                           MyTextField(
                             screenheight * 0.048596112311,
                             screenwitdh * 0.785219399538,
+                            emailController3,
+                            'Email ',
+                          ),
+                          smallVerticalPadding,
+                          MyTextField(
+                            screenheight * 0.048596112311,
+                            screenwitdh * 0.785219399538,
                             nameController1,
                             'First name',
                           ),
-                          SizedBox(
-                            height: screenheight * 0.04,
-                          ),
+                          smallVerticalPadding,
                           MyTextField(
                             screenheight * 0.048596112311,
                             screenwitdh * 0.785219399538,
                             surnameController2,
                             'Last name',
                           ),
-                          SizedBox(
-                            height: screenheight * 0.04,
-                          ),
+                          smallVerticalPadding,
                           MyTextField(
                             screenheight * 0.048596112311,
                             screenwitdh * 0.785219399538,
                             passwordController5,
                             'Password',
                           ),
-                          SizedBox(
-                            height: screenheight * 0.04,
-                          ),
+                          smallVerticalPadding,
                           MyTextField(
                             screenheight * 0.048596112311,
                             screenwitdh * 0.785219399538,
                             wilayaController4,
                             'Wilaya',
                           ),
-                          SizedBox(
-                            height: screenheight * 0.04,
-                          ),
-                          MyTextField(
-                            screenheight * 0.048596112311,
-                            screenwitdh * 0.785219399538,
-                            emailController3,
-                            'Email ',
-                          ),
-                          SizedBox(
-                            height: screenheight * 0.04,
-                          ),
+                          smallVerticalPadding,
                           InkWell(
                             onTap: (() {
                               showDatePicker(
@@ -151,31 +143,46 @@ class _SignUpScreentate extends State<SignUpScreen> {
                               });
                             }),
                             child: Container(
-                              width: screenwitdh * 0.785219399538,
-                              height: screenheight * 0.048596112311,
+                              width: Get.width - 50,
+                              height: Get.height * 0.06,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        blurRadius: 10,
-                                        color: Colors.grey.withOpacity(0.2),
-                                        spreadRadius: 10),
-                                  ]),
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      offset: Offset(0, 3)),
+                                ],
+                              ),
                               child: Center(
-                                  child: Text(
-                                selectedDate == null
-                                    ? 'Date of  Birth'
-                                    : DateFormat.yMd()
-                                        .format(selectedDate)
-                                        .toString(),
-                                style: TextStyle(color: Colors.grey),
+                                  child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      selectedDate == null
+                                          ? 'Date of  Birth'
+                                          : DateFormat.yMd()
+                                              .format(selectedDate)
+                                              .toString(),
+                                      style:
+                                          const TextStyle(color: Colors.grey),
+                                    ),
+                                    Icon(
+                                      Icons.calendar_month,
+                                      color: grey,
+                                    )
+                                  ],
+                                ),
                               )),
                             ),
                           ),
-                          SizedBox(
-                            height: screenheight * 0.02,
-                          ),
+                          smallVerticalPadding,
                           Padding(
                             padding: EdgeInsets.only(
                                 left: screenwitdh * 0.07,
@@ -240,70 +247,36 @@ class _SignUpScreentate extends State<SignUpScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            width: screenwitdh,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                InkWell(
-                                  onTap: () => Get.toNamed('/'),
-                                  child: Container(
-                                      width: screenwitdh * 0.275,
-                                      height: screenheight * 0.05,
-                                      decoration: BoxDecoration(
-                                          boxShadow: const [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                spreadRadius: 1,
-                                                blurRadius: 20),
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Center(
-                                        child: _currentPage == 2
-                                            ? Text('Skip')
-                                            : Text(
-                                                'Cancel',
-                                                style: TextStyle(
-                                                  fontSize: screenwitdh * 0.05,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: azrak,
-                                                ),
-                                              ),
-                                      )),
+                          InkWell(
+                            onTap: _handleNextPage,
+                            child: Container(
+                                width: Get.width - 50,
+                                height: Get.height * 0.06,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: azrak,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 5,
+                                        color: Colors.grey.withOpacity(0.2),
+                                        spreadRadius: 2,
+                                        offset: Offset(0, 3)),
+                                  ],
                                 ),
-                                InkWell(
-                                  onTap: _handleNextPage,
-                                  child: Container(
-                                      width: screenwitdh * 0.275,
-                                      height: screenheight * 0.05,
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                spreadRadius: 1,
-                                                blurRadius: 20),
-                                          ],
-                                          color: azrak,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Center(
-                                        child: _currentPage == 2
-                                            ? Text('Finish')
-                                            : Text(
-                                                'Next',
-                                                style: TextStyle(
-                                                  fontSize: screenwitdh * 0.05,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                      )),
-                                ),
-                              ],
-                            ),
+                                child: Center(
+                                  child: _currentPage == 2
+                                      ? const Text('Finish')
+                                      : Text(
+                                          'Next',
+                                          style: TextStyle(
+                                            fontSize: screenwitdh * 0.05,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                )),
                           ),
+                          smallVerticalPadding,
                         ],
                       ),
                     )),
@@ -321,7 +294,7 @@ class _SignUpScreentate extends State<SignUpScreen> {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: LinearProgressIndicator(
                     minHeight: screenwitdh * 0.03,
                     value: (_currentPage + 1) / 2,
@@ -340,25 +313,28 @@ class _SignUpScreentate extends State<SignUpScreen> {
   Widget MyTextField(double height, double witdh,
       TextEditingController editingController, String hint) {
     return Container(
-        width: witdh,
-        height: height,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 5,
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 5),
-            ]),
-        child: hint == 'Wilaya'
-            ? Stack(
-                children: [
-                  TextField(
-                    controller: editingController,
-                    cursorHeight: height / 2,
-                    enabled: false,
-                    decoration: InputDecoration(
+      width: Get.width - 50,
+      height: Get.height * 0.06,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 5,
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 2,
+                offset: Offset(0, 3)),
+          ]),
+      child: hint == 'Wilaya'
+          ? Stack(
+              children: [
+                TextField(
+                  controller: editingController,
+                  cursorHeight: height / 2,
+                  enabled: false,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      disabledBorder: InputBorder.none,
                       contentPadding: EdgeInsets.symmetric(
                           horizontal: witdh * 0.05, vertical: height * 0.2),
                       suffixIcon: hint == 'Email '
@@ -376,88 +352,70 @@ class _SignUpScreentate extends State<SignUpScreen> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: witdh * 0.05,
                                   vertical: height * 0.3),
-                              child: Text(
+                              child: const Text(
                                 ' +213',
                                 style: TextStyle(fontSize: 18),
                               ),
                             )
                           : null,
                       hintText: hint,
-                      hintStyle: TextStyle(color: Colors.grey),
+                      hintStyle: const TextStyle(color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
-                          color: Colors.grey,
+                          color: Colors.transparent,
                           width: 0,
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: const BorderSide(
-                          color: azrak,
-                          width: 0.5,
+                      focusedBorder: InputBorder.none),
+                ),
+                Positioned(
+                  right: 0,
+                  child: DropdownButton<String>(
+                    iconSize: witdh * 0.12,
+                    icon: const Icon(Icons.arrow_downward),
+                    value: wilaya,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        wilaya = newValue!;
+                        wilayaController4.text = newValue;
+                      });
+                    },
+                    items: <String>['Setif', 'Alger', 'Oran', 'Annaba']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    child: DropdownButton<String>(
-                      iconSize: witdh * 0.12,
-                      icon: Icon(Icons.arrow_downward),
-                      value: wilaya,
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          wilaya = newValue!;
-                          wilayaController4.text = newValue;
-                        });
-                      },
-                      items: <String>['Setif', 'Alger', 'Oran', 'Annaba']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ],
-              )
-            : TextField(
-                obscureText: hint == 'Password' ? true : false,
-                controller: editingController,
-                cursorHeight: height / 2,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(
-                      horizontal: witdh * 0.05, vertical: height * 0.2),
-                  suffixIcon: hint == 'Email '
-                      ? Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: witdh * 0.01, vertical: height * 0.2),
-                          child: Image.asset(
-                            'assets/images/alg.png',
-                          ),
-                        )
-                      : null,
-                  hintText: hint,
-                  hintStyle: TextStyle(color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 0,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: azrak,
-                      width: 0.5,
-                    ),
+                      );
+                    }).toList(),
                   ),
                 ),
-              ));
+              ],
+            )
+          : TextField(
+              obscureText: hint == 'Password' ? true : false,
+              controller: editingController,
+              cursorHeight: height / 2,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                    horizontal: witdh * 0.05, vertical: height * 0.2),
+                suffixIcon: hint == 'Email '
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: witdh * 0.01, vertical: height * 0.2),
+                        child: Image.asset(
+                          'assets/images/alg.png',
+                        ),
+                      )
+                    : null,
+                hintText: hint,
+                hintStyle: const TextStyle(color: Colors.grey),
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+              ),
+            ),
+    );
   }
 }

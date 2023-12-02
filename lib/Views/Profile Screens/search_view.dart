@@ -46,17 +46,22 @@ class SearchView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: screenwidth * 0.747663551402 * 0.15,
-                        height: screenheight * 0.0581888653982,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              topLeft: Radius.circular(10)),
-                          color: Colors.white,
-                        ),
-                        child: const Center(
-                          child: Icon(Icons.search, color: azrak),
+                      InkWell(
+                        onTap: (() {
+                          Get.toNamed("/searchResult");
+                        }),
+                        child: Container(
+                          width: screenwidth * 0.747663551402 * 0.15,
+                          height: screenheight * 0.0581888653982,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10),
+                                topLeft: Radius.circular(10)),
+                            color: Colors.white,
+                          ),
+                          child: const Center(
+                            child: Icon(Icons.search, color: azrak),
+                          ),
                         ),
                       ),
                       const Expanded(
@@ -84,7 +89,7 @@ class SearchView extends StatelessWidget {
           ),
 
           //body
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.0),

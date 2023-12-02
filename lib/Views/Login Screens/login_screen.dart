@@ -240,7 +240,7 @@ class LoginSecreen extends StatelessWidget {
     print('login tapped ');
     print(email);
     print(password);
-    Get.to(HomeScreen());
+    Get.offAll(HomeScreen());
     // await loginController.login(email, password);
   }
 
